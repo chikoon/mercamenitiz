@@ -6,4 +6,8 @@
 # Recursively load all libraries inside the ./lib directory
 Dir[Dir.pwd + "/lib/**/*.rb"].each { |f| require f }
 
-puts "Welcome to Amenitiz Supermarket"
+loop {
+    puts "Welcome to Amenitiz Supermarket"
+    input = gets.strip
+    puts ("%s coming soon!" % input) if input.length > 0
+}
