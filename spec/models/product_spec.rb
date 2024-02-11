@@ -17,13 +17,13 @@ RSpec.describe Product, type: :model do
             end
         end
 
-        context 'failure should happen when' do
+        context 'fail unless it' do
             before(:each){
                 @ok_args = @good_args_list.values.last
                 @product = Product.new *@ok_args
             }
 
-            it "doesn't have a three letter uppercase product code" do
+            it "has a-three letter uppercase product code" do
                 [nil, '', 'a', 'ab', 'abc', 'ABCD'].each{|bad_value|
                     @product.code = bad_value
                     expect(@product.valid?).to be false
@@ -31,7 +31,7 @@ RSpec.describe Product, type: :model do
                 }
             end
 
-            it "doesn't have a name" do
+            it "has a name" do
                 [nil, ''].each{|bad_value|
                     @product.name = bad_value
                     expect(@product.valid?).to be false
@@ -39,7 +39,7 @@ RSpec.describe Product, type: :model do
                 }
             end
 
-            it "doesn't have a numeric price greater than zero" do
+            it "has a numeric price greater than zero" do
                 [nil, '', 'hello', '-1', -1, 0, '0.00', '0', '1,00€'].each{|bad_value|
                     @product.price = bad_value
                     expect(@product.valid?).to be false
