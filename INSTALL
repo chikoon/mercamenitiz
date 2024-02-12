@@ -1,4 +1,11 @@
 INSTALL
 
-$ rvm install 3.3.0
+ -> get correct ruby version
+    $ rvm install 3.1.2
+
+ -> install gems in Gemfile
+    $ bundle install
+
+ 
+
 
