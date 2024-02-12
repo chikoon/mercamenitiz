@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 # Amenitiz Tech Challenge
-# $ ruby shop.rb
+# $ ruby main.rb
 
 # Recursively load all libraries inside the ./lib directory
 Dir[Dir.pwd + "/lib/**/*.rb"].each { |f| require f }
