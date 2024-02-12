@@ -12,7 +12,6 @@ RSpec.describe Store, type: :class do
             expect(store.respond_to?(property)).to be true
             expect(store.send(property).is_a?(klass)).to be true
         }
-        
     end
 
     context "adding products should" do
@@ -62,6 +61,7 @@ RSpec.describe Store, type: :class do
             expect(codes.first.to_s).to eq('AAA')
         end
     end
+
     context "should search a product by code" do
         before(:all){
             @store = Store.new("Test Store")
