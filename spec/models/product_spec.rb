@@ -1,5 +1,7 @@
 RSpec.describe Product, type: :model do
+
     describe 'creation' do 
+
         before(:all){
             @good_args_list = { # a list of good arguments
                 price_float: ['AAA', 'AAA battery', 1.1111],
@@ -9,6 +11,7 @@ RSpec.describe Product, type: :model do
                 price_str_3: ['AAA', 'AAA battery', '1.11€']
             }
         }
+
         context 'success' do
             it 'should return a product instance' do
                 @good_args_list.each{|theme, argset|
@@ -46,6 +49,9 @@ RSpec.describe Product, type: :model do
                     expect(@product.errors.keys.include?(:price)).to be true
                 }
             end
+
         end
+
     end
+
 end

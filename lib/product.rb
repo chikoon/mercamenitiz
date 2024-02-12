@@ -8,9 +8,10 @@ class Product
         @format = num_format.to_s
     end
 
-    def price_str; ':f€' % sprintf("%.2f", @price); end
+    def price_str; '%s€' % sprintf("%.2f", @price); end
 
     def to_a; [@code, @name, price_str]; end
+    def to_s; to_a.join(', '); end
 
     def valid?
         check = { # validations
