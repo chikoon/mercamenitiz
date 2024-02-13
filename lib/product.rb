@@ -15,12 +15,12 @@ class Product
 
     def valid?
         check = { # validations
-            code: !!(@code.to_s.match(/^[A-Z]{3}$/)),
+            code: !!(@code.to_s.match(/^[A-Z0-9]{3}$/)),
             name: !!(@name.to_s.match(/^.+$/)),
             price: (@price.is_a?(Float) && @price > 0)
         }
         msgs = {   # error messages
-            code:  'Expected a three-letter, uppercase code',
+            code:  'Expected a three-letter, uppercase alphanumeric code',
             name:  'Expected a name',
             price: 'Expected price to be greater than 0'
         }

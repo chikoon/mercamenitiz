@@ -27,9 +27,10 @@ class Store
     end
 
     def checkout
-        output = ['CHECKOUT'] 
-        output << @cart.join("\n")
-        output << @discounts.join("\n") if info.size > 0
+        output = ['CHECKOUT']
+        # byebug
+        output = output + @cart.items.map{|i| i.to_s}
+        #output << @discounts.join("\n") if info.size > 0
         output << 'TOTAL: %s' % calculate_total
         output
     end

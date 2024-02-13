@@ -101,3 +101,9 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
+
+RSpec.configure do |c|
+    # supress stdout (:puts) when executing specs
+    # https://stackoverflow.com/questions/15430551/suppress-console-output-during-rspec-tests
+    c.before { allow($stdout).to receive(:puts) }
+end
