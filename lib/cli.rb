@@ -3,12 +3,12 @@ class CLI
 
     def initialize(store)
         @store = store
-        @hint  = "Type option (H/L/A/R/C/S/X or HELP) and hit ENTER."
+        @hint  = "Type option (L/A/R/C/S/X/Q/H or HELP) and hit ENTER."
     end
 
     def enter
-        #puts "Welcome to #{@store.name}!"
-        puts separator "Welcome to #{@store.name}!"
+        puts "Welcome to #{@store.name}!"
+        puts
 
         display_choices
 
@@ -26,15 +26,15 @@ class CLI
     private
 
     def display_choices
-        puts separator 'Option Menu'
+        puts separator 'Options Menu'
         puts %{
-            [H] Show this option menu
             [L] List products
             [A] Add item to cart
             [R] Remove item from cart
             [C] Show cart contents
             [X] Checkout
             [Q] Quit
+            [H] Show this help
         }.gsub(/\n\s*/, "\n").strip
     end
 
@@ -42,7 +42,6 @@ class CLI
         choice = raw_choice.to_s.strip.upcase
         return unless choice.size > 0
         case choice
-            when /^(H|HELP)$/;     option_h_show_help
             when /^(L|LIST)$/;     option_l_list_products
             when /^(A|ADD)$/;      option_a_add_item_to_cart
             when /^(R|REMOVE)$/;   option_r_remove_item_from_cart
@@ -50,6 +49,7 @@ class CLI
             when /^(S|SUBTOTAL)$/; option_s_subtotal
             when /^(X|CHECKOUT)$/; option_x_checkout; return true;
             when /^(Q|QUIT)$/;     return true
+            when /^(H|HELP)$/;     option_h_show_help
             else; puts "ERROR: Invalid option \"#{choice}\". Please try again."
         end
         false
