@@ -14,24 +14,12 @@ Dir[Dir.pwd + "/lib/**/*.rb"].each { |f| require f }
 #    To-do: read this in from a csv or yaml file
 #    4-now: copy product data directly from REQUIREMENTS
 #           and paste in here.
-raw_product_data = %{
+
+product_data = AppUtil.parse_csv(%{
     GR1, Green Tea,    3.11€
     SR1, Strawberries, 5.00 €
     CF1, Coffee,       11.23 €
-}
-
-parse_data = Proc.new {|d|
-    # remove leading space on each line
-    # remove leading and trailing spaces
-    # remove redundant spaces, replace > 1 space with a single space
-    # make an array of lines
-    # each line split by comma (code, name, price)
-    d.gsub(/\n\s*/, "\n").strip.split("\n").
-    map{|row| row.gsub(/[\s]+/, ' ').split(",").map{|e| e.strip } }
-}
-
-product_data = parse_data.call(raw_product_data)
-
+})
 
 # -- Promos ------------------------------------------------------------
 #    To-do: Dynamically load these promos or make their inclusion
@@ -47,12 +35,7 @@ product_promos = [
 # -- Get this party started --------------------------------------------
 store = Store.new('MercAmenitiz')
 
-product_data.each{   |row|
-    product = Product.new(*row)
-    store.add_product product
-    puts "Add product to #{store.name}: %s" % product.to_s
-}
-
+product_data.each{   |row|   store.add_product Product.new(*row) }
 product_promos.each{ |promo| store.add_promo(promo) }
 
 cli = CLI.new(store).enter
