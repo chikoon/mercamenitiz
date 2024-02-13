@@ -18,7 +18,7 @@ class CLI
             choice = gets.strip
             puts
             done = execute_choice choice
-            break if done
+            if done; say_goodbye; break; end
         }
     end
 
@@ -101,6 +101,10 @@ class CLI
 
     def option_x_checkout
         puts @store.checkout
+    end
+
+    def say_goodbye
+        puts "Thankyou for shopping at #{@store.name}. Come back soon! Goodbye"
     end
 
     def separator(title=nil)
