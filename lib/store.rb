@@ -22,14 +22,33 @@ class Store
         end
     end
 
-    def calculate_total
-        total = @cart.items.collect{|i| i.price}.inject(0, :+)
+    def check_promos
+        blurbs = []
+        @promos.each { |promo|
+            next unless promo.check(@cart.items) # no discount applied
+            blurbs << promo.blurb
+        }
+        discounted_total = @cart.items.collect{|i| i.price}.inject(0, :+)
+        [blurbs, discounted_total]
     end
 
     def checkout
-        output = ['CHECKOUT']
-        output = output + @cart.items.map{|i| i.to_s}
-        output << 'TOTAL: %s' % calculate_total
+        output = []
+        @cart.items.map{|i| output << i.to_s } # cart contents
+        total = @cart.items.collect{|i| i.price}.inject(0, :+)
+        promos, discounted_total = check_promos
+        if promos.size > 0
+            output << 'SUBTOTAL: %s€' % sprintf("%.2f", total)
+            output << '%i promo%s applied:' % [
+                promos.size,
+                (promos.size === 1) ? '' : 's'
+            ]
+            promos.each{|blurb| output << '- ' + blurb }
+            output << 'DISCOUNT: %s€' % sprintf("%.2f", (total - discounted_total))
+            output << 'TOTAL:    %s€' % sprintf("%.2f", discounted_total)
+        else
+            output << 'TOTAL: %s€' % total
+        end
         output
     end
 
@@ -38,9 +57,11 @@ class Store
         raise "Product not found: #{code}"
     end
 
+    def product_codes; @products.collect(&:code); end
+
     def product_exists?(code); product_codes.include? code; end
 
-    def product_codes; @products.collect(&:code); end
+    def promo_list; @promos.collect{|promo| promo.blurb }; end
 
     def product_list
         output = []
@@ -51,7 +72,5 @@ class Store
         @products.each{ |product| output << product.to_s }
         output
     end
-
-    def subtotal; calculate_total; end
 
 end

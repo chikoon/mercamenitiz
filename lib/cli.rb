@@ -3,7 +3,7 @@ class CLI
 
     def initialize(store)
         @store = store
-        @hint  = "Type option (L/A/R/C/S/X/Q/H or HELP) and hit ENTER."
+        @hint  = "Type option (P/O/A/R/C/X/Q/H or HELP) and hit ENTER."
     end
 
     def enter
@@ -27,8 +27,10 @@ class CLI
 
     def display_choices
         puts separator 'Options Menu'
+        # add O for See promotions
         puts %{
-            [L] List products
+            [P] List products
+            [O] List available offers
             [A] Add item to cart
             [R] Remove item from cart
             [C] Show cart contents
@@ -42,7 +44,8 @@ class CLI
         choice = raw_choice.to_s.strip.upcase
         return unless choice.size > 0
         case choice
-            when /^(L|LIST)$/;     option_l_list_products
+            when /^(P|PRODUCTS)$/; option_p_list_products
+            when /^(O|OFFERS)$/;   option_o_list_offers
             when /^(A|ADD)$/;      option_a_add_item_to_cart
             when /^(R|REMOVE)$/;   option_r_remove_item_from_cart
             when /^(C|CART)$/;     option_c_show_cart
@@ -72,7 +75,12 @@ class CLI
 
     def option_h_show_help; display_choices; end
 
-    def option_l_list_products
+    def option_o_list_offers
+        puts separator 'Our Special Offers'
+        puts @store.promo_list
+    end
+
+    def option_p_list_products
         puts separator 'Our Products'
         puts @store.product_list
     end
@@ -100,10 +108,12 @@ class CLI
     end
 
     def option_x_checkout
+        puts separator 'Checkout'
         puts @store.checkout
     end
 
     def say_goodbye
+        puts separator
         puts "Thankyou for shopping at #{@store.name}. Come back soon! Goodbye"
     end
 

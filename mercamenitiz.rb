@@ -26,16 +26,12 @@ product_data = AppUtil.parse_csv(%{
 #           easier, perhaps in an external config file, yaml, etc.
 #    4-now: List the promos to include in the following array.
 #           Use the name of the Promo subclass. See ./lib/promos
-product_promos = [
-    #TwoForOneTea
-    #BulkStrawberries
-    #BulkCoffee
-]
+product_promos = [ TwoForOneTea, BulkStrawberries, BulkCoffee ]
 
 # -- Get this party started --------------------------------------------
 store = Store.new('MercAmenitiz')
 
 product_data.each{   |row|   store.add_product Product.new(*row) }
-product_promos.each{ |promo| store.add_promo(promo) }
+product_promos.each{ |promo| store.add_promo(promo.new) }
 
 cli = CLI.new(store).enter

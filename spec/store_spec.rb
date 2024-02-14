@@ -42,8 +42,10 @@ RSpec.describe Store, type: :class do
     context "should return a list" do
         before(:all){
             @store = Store.new("Test Store")
-            @store.add_product @product_1
-            @store.add_product @product_2
+            [ @product_1, @product_2].
+                each{|product| @store.add_product product }
+            [ TwoForOneTea, BulkStrawberries, BulkCoffee ].
+                each{|promo| @store.add_promo promo.new }
         }
 
         it "of products" do
@@ -52,6 +54,11 @@ RSpec.describe Store, type: :class do
             expect(@store.product_list.size).to be 2
             expect(@store.product_list.first.class).to be String
             expect(@store.product_list.first).to eq(@store.products.first.to_s)
+        end
+
+        it "of promotional offer blurbs" do
+            expect(@store.promo_list.size).to be 3
+            expect(@store.promo_list.first).to match(/two for one/i)
         end
 
         it "of existing product codes" do

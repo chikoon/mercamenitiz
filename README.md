@@ -1,4 +1,4 @@
-# Amenitiz Tech Challenge
+# MercAmenitiz Tech Challenge
 Build a shopping cart command-line app
 
 ## Requirements
@@ -20,17 +20,17 @@ This app will be able to add products to a cart and compute the total price.
        bundle install
 
 ## Usage
-1. Run the application using `ruby main.rb`.
-2. Follow the on-screen instructions to scan products, view the basket,
-   and complete a checkout:
+1. Run the main application script using `ruby mercamenitiz.rb`.
+2. Follow the on-screen instructions:
 
-          [H] Show help
-          [L] List products
+          [P] List products
+          [O] List available offers
           [A] Add item to cart
           [R] Remove item from cart
           [C] Show cart contents
           [X] Checkout
           [Q] Quit
+          [H] Show this help
 
 ## Code Structure
 - `lib`:  main application logic.
@@ -44,10 +44,6 @@ This app will be able to add products to a cart and compute the total price.
 ## How to Run Tests
 Execute the following command in the project directory:
     `rspec spec`
-
-## Future Enhancements
-- Support for additional pricing rules.
-- Improved user interface.
 
 ## Contact Author
 For questions or feedback

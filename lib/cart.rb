@@ -6,7 +6,8 @@ class Cart
     def add(product)
         valid = product.is_a?(Product) && product.valid?
         raise "Expected a valid product" unless valid
-        @items << product
+        # important to clone here so that prices can be modified later when applying promos
+        @items << product.clone
     end
 
     def contains?(code); count(code) > 0; end
