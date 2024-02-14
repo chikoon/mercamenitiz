@@ -4,7 +4,7 @@
 #    Author: Mike Blake             mike@chikoon.com, +34 652 927 813
 
 # -- How to execute ----------------------------------------------------
-#    $ ruby main.rb
+#    $ ruby mercamenitiz.rb
 
 # -- Load classes ------------------------------------------------------
 #    Recursively load all libraries inside the ./lib directory

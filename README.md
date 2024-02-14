@@ -1,5 +1,5 @@
-# MercAmenitiz Tech Challenge
-Build a shopping cart command-line app
+# MercAmenitiz
+Shopping cart CLI app written by Mike Blake as a tech challenge.
 
 ## Requirements
 You are the developer in charge of building a cash register.
@@ -14,13 +14,16 @@ This app will be able to add products to a cart and compute the total price.
 - [Contact Author](#contact-author)
 
 ## Installation
-1. Download the code from XXX
+1. Download the code from github: https://github.com/chikoon/mercamenitiz
 2. Install required dependencies using 
 
        bundle install
 
 ## Usage
-1. Run the main application script using `ruby mercamenitiz.rb`.
+1. Execute the main script at the root of the project directory.
+
+       ruby ./mercamenitiz.rb
+
 2. Follow the on-screen instructions:
 
           [P] List products
